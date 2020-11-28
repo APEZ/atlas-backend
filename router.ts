@@ -1,6 +1,6 @@
 import { Router } from "express";
 import fs from 'fs'
-import {Controller} from "./class/Controller";
+import {Controller} from "./classes/Controller";
 
 const addRoute = (router, route: string, methods) => {
     if (methods.GET) router.get(route, methods.GET);

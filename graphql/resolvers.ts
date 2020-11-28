@@ -1,5 +1,5 @@
 import fs from "fs";
-import {Controller} from "../class/Controller";
+import {Controller} from "../classes/Controller";
 
 const defaultResolvers = {
     Query: {

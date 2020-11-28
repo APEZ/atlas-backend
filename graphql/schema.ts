@@ -1,6 +1,6 @@
 import { DocumentNode } from 'graphql'
 import fs from "fs";
-import {Controller} from "../class/Controller";
+import {Controller} from "../classes/Controller";
 import { gql } from 'apollo-server-lambda'
 
 const defaultSchema = gql`

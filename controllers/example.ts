@@ -1,4 +1,4 @@
-import {Controller} from '../class/Controller'
+import {Controller} from '../classes/Controller'
 import {Request, Response} from 'express'
 import {gql} from 'apollo-server-lambda'
 
