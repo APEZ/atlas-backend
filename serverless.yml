@@ -10,7 +10,7 @@ provider:
 
 functions:
   graphql:
-    handler: graphql.handler
+    handler: graphql/graphql.handler
     events:
       - http:
           path: graphql
@@ -20,8 +20,8 @@ functions:
           path: graphql
           method: get
           cors: true
-  main:
-    handler: handler.handler
+  http:
+    handler: http/http.handler
     events:
       - http: ANY /
       - http: 'ANY /{proxy+}'
