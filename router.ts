@@ -1,24 +1,19 @@
-import { Router } from "express";
-import fs from 'fs'
-import {Controller} from "./classes/Controller";
+import {Router} from "express";
+import {Controller, GetControllers} from "./classes/Controller";
 
-const addRoute = (router, route: string, methods) => {
-    if (methods.GET) router.get(route, methods.GET);
-    if (methods.POST) router.post(route, methods.POST);
-    if (methods.PUT) router.put(route, methods.PUT);
-    if (methods.DELETE) router.delete(route, methods.DELETE);
-};
-
-export const getRouter = () => {
+const getRouter = (): Router => {
     const router = Router();
-    for (const file of fs.readdirSync(__dirname + '/controllers/')) {
-        const controllers: Controller[] = require(__dirname + '/controllers/' + file).controllers;
 
-        for (const controller of controllers)
-            if (controller.Path && controller.Methods) addRoute(router, controller.Path, controller.Methods);
-    }
+    for (const controller of GetControllers())
+        if (controller.Path && controller.Methods) {
+            if (controller.Methods.GET) router.get(controller.Path, controller.Methods.GET);
+            if (controller.Methods.POST) router.post(controller.Path, controller.Methods.POST);
+            if (controller.Methods.PUT) router.put(controller.Path, controller.Methods.PUT);
+            if (controller.Methods.DELETE) router.delete(controller.Path, controller.Methods.DELETE);
+        }
+
     return router;
-};
+}
 
 export const router: Router = getRouter();
 

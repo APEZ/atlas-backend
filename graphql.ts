@@ -1,9 +1,8 @@
 import { ApolloServer } from 'apollo-server-lambda'
-
 import { schemas as typeDefs } from './graphql/schema'
 import { resolvers } from './graphql/resolvers'
 
-const server = new ApolloServer({
+const server: ApolloServer = new ApolloServer({
     typeDefs,
     resolvers,
     playground: {
@@ -11,4 +10,4 @@ const server = new ApolloServer({
     }
 });
 
-export const handler = server.createHandler();
+export const handler: any = server.createHandler();

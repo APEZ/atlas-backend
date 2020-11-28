@@ -1,9 +1,8 @@
 import { DocumentNode } from 'graphql'
-import fs from "fs";
-import {Controller} from "../classes/Controller";
+import {GetControllers} from "../classes/Controller";
 import { gql } from 'apollo-server-lambda'
 
-const defaultSchema = gql`
+const defaultSchema: DocumentNode = gql`
     type Query {
         default: Boolean!
     }
@@ -12,14 +11,12 @@ const defaultSchema = gql`
     }
 `;
 
-const getSchemas = () => {
+const getSchemas = (): DocumentNode[] => {
     const listOfSchema: DocumentNode[] = [ defaultSchema ];
-    for (const file of fs.readdirSync(__dirname + '/../controllers/')) {
-        const controllers: Controller[] = require(__dirname + '/../controllers/' + file).controllers;
 
-        for (const controller of controllers)
-            if (controller.Schema) listOfSchema.push(controller.Schema);
-    }
+    for (const controller of GetControllers())
+        if (controller.Schema) listOfSchema.push(controller.Schema);
+
     return listOfSchema;
 }
 
